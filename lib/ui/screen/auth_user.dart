@@ -41,7 +41,7 @@ class _AuthUserState extends State<AuthUser> {
                         SvgPicture.asset('assets/svg/abby1.svg', height: 100.0)),
               ),
             ),
-             if (!isKeyboard) const buttomImge(),
+             if (!isKeyboard) const BottomImage(),
             Positioned(
               top: 210.0,
               left: 25.0,
@@ -161,8 +161,8 @@ class _AuthUserState extends State<AuthUser> {
   }
 }
 
-class buttomImge extends StatelessWidget {
-  const buttomImge({
+class BottomImage extends StatelessWidget {
+  const BottomImage({
     Key? key,
   }) : super(key: key);
 
