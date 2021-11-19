@@ -15,10 +15,10 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-Side Husstle Project 3b
+Side Husstle Project week 3
 ![](assets/images/Recording.mp4)
 
 -   Android View
 ![](assets/images/emulator.png)
 -   iOS View
-![](assets/images/simulator.png) 
+![](assets/images/simulator.png)  
