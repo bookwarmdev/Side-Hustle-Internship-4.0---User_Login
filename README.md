@@ -16,9 +16,3 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 Side Husstle Project 3b
-![](assets/images/Screen_Recording.mp4)
-
--   Android View
-![](assets/images/emulator.png)
--   iOS View
-![](assets/images/simulator.png) 
