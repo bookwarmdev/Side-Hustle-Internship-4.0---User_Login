@@ -21,5 +21,4 @@ Side Husstle Project 3b
 -   Android View
 ![](assets/images/emulator.png)
 -   iOS View
-![](assets/images/simulator.png)
-
+![](assets/images/simulator.png) 
