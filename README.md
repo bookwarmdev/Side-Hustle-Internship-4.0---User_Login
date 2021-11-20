@@ -15,6 +15,10 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+
+https://user-images.githubusercontent.com/65780663/142713638-87dd7dbc-7713-4967-ae55-7fca01fb5827.mp4
+
+
 Side Husstle Project week 3
 ![](assets/images/Recording.mp4)
 
