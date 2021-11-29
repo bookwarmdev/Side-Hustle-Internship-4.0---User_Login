@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weekproject/core/login_screen.dart';
+import 'package:weekproject/core/signup_screen.dart';
 import 'package:weekproject/core/style.dart';
 
 class AuthUser extends StatefulWidget {
@@ -12,14 +13,12 @@ class AuthUser extends StatefulWidget {
   _AuthUserState createState() => _AuthUserState();
 }
 
-
 class _AuthUserState extends State<AuthUser> {
-  bool isLogin = false; 
+  bool isLogin = false;
 
   @override
   Widget build(BuildContext context) {
-
-  final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -29,7 +28,7 @@ class _AuthUserState extends State<AuthUser> {
             Positioned(
               top: -120.0,
               child: Container(
-                height: 460,
+                height: 440,
                 width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -37,14 +36,14 @@ class _AuthUserState extends State<AuthUser> {
                       fit: BoxFit.cover),
                 ),
                 child: Center(
-                    child:
-                        SvgPicture.asset('assets/svg/abby1.svg', height: 100.0)),
+                    child: SvgPicture.asset('assets/svg/abby1.svg',
+                        height: 100.0)),
               ),
             ),
-             if (!isKeyboard) const BottomImage(),
+            if (!isKeyboard) const BottomImage(),
             Positioned(
-              top: 210.0,
-              left: 25.0,
+              top: 180.0,
+              left: MediaQuery.of(context).size.width / 8,
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 30,
@@ -65,13 +64,15 @@ class _AuthUserState extends State<AuthUser> {
                     )
                   ],
                 ),
-                width: MediaQuery.of(context).size.width - 50,
+                width: MediaQuery.of(context).size.width - 100,
                 height: MediaQuery.of(context).size.height / 1.6,
                 child: Column(
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: kBorderColor,),
+                        border: Border.all(
+                          color: kBorderColor,
+                        ),
                         borderRadius: const BorderRadius.all(
                           Radius.circular(50.0),
                         ),
@@ -79,63 +80,28 @@ class _AuthUserState extends State<AuthUser> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isLogin = true;
-                                });
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: isLogin ? kPrimaryColor : Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(50.0),
-                                  ),
-                                ),
-                                width: 150.0,
-                                height: 40.0,
-                                child: Center(
-                                  child: Text(
-                                    'Log In',
-                                    style: TextStyle(
-                                        color: isLogin
-                                            ? Colors.white
-                                            : kPrimaryColor),
-                                  ),
-                                ),
-                              ),
-                            ),
+                          AuthButton(
+                            onTap: () {
+                              setState(() {
+                                isLogin = true;
+                              });
+                            },
+                            color: isLogin ? kPrimaryColor : Colors.white,
+                            textColor: isLogin ? Colors.white : kPrimaryColor,
+                            text: 'Log In',
                           ),
                           const SizedBox(
                             width: 15,
                           ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
+                          AuthButton(
+                            onTap: () {
+                              setState(() {
                                 isLogin = false;
-                                setState(() {});
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: !isLogin ? kPrimaryColor : Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(50.0),
-                                  ),
-                                ),
-                                width: 150.0,
-                                height: 40.0,
-                                child: Center(
-                                  child: Text(
-                                    'Sign Up',
-                                    style: TextStyle(
-                                        color: !isLogin
-                                            ? Colors.white
-                                            : kPrimaryColor),
-                                  ),
-                                ),
-                              ),
-                            ),
+                              });
+                            },
+                            color: !isLogin ? kPrimaryColor : Colors.white,
+                            textColor: !isLogin ? Colors.white : kPrimaryColor,
+                            text: 'Sign Up',
                           ),
                         ],
                       ),
@@ -146,9 +112,10 @@ class _AuthUserState extends State<AuthUser> {
                       ),
                       const LoginScreen(),
                     ] else ...[
-                      const Expanded(
-                        child: Center(child: Text('SIGN OUT PAGE')),
-                      )
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      const SignupScreen(),
                     ],
                   ],
                 ),
@@ -169,17 +136,52 @@ class BottomImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-     bottom: -10.0,
-     right: -0.0, 
-     child: Container(
-       height: MediaQuery.of(context).size.width / 1.6,
-       width: MediaQuery.of(context).size.width / 1.3,
-       decoration: const BoxDecoration(
-         image: DecorationImage(
-             image: AssetImage('assets/images/two.png'),
-             fit: BoxFit.cover),
-       ),
-     ),
-          );
+      bottom: -20.0,
+      right: -20.0,
+      child: Container(
+        height: MediaQuery.of(context).size.width / 1.6,
+        width: MediaQuery.of(context).size.width / 1.3,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/two.png'), fit: BoxFit.cover),
+        ),
+      ),
+    );
+  }
+}
+
+class AuthButton extends StatelessWidget {
+  GestureTapCallback? onTap;
+  Color? color;
+  Color? textColor;
+  String text;
+
+  AuthButton(
+      {Key? key, this.onTap, this.color, this.textColor, required this.text})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(50.0),
+            ),
+          ),
+          width: 150.0,
+          height: 40.0,
+          child: Center(
+            child: Text(
+              text,
+              style: TextStyle(color: textColor),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

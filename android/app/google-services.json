@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "787623213377",
+    "firebase_url": "https://push-notification-24c51.firebaseio.com",
+    "project_id": "push-notification-24c51",
+    "storage_bucket": "push-notification-24c51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787623213377:android:ab6f8722c299ce9f2589c0",
+        "android_client_info": {
+          "package_name": "com.bookwarm.pushapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787623213377-fjhlaarti5tjo6t5tfflbmhl2llvnaj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVmh7G0DGSNeVzgA9qpiSIF4-WIYCBl50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787623213377-fjhlaarti5tjo6t5tfflbmhl2llvnaj6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787623213377-2hsfg20kjlhsg9km8966pjrrtd3r85h4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bookwarmdev.weekproject"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787623213377:android:8a0c3a9dac1734d82589c0",
+        "android_client_info": {
+          "package_name": "com.example.weekproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787623213377-fjhlaarti5tjo6t5tfflbmhl2llvnaj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVmh7G0DGSNeVzgA9qpiSIF4-WIYCBl50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787623213377-fjhlaarti5tjo6t5tfflbmhl2llvnaj6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787623213377-2hsfg20kjlhsg9km8966pjrrtd3r85h4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bookwarmdev.weekproject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

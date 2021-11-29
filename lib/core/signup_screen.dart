@@ -1,23 +1,30 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weekproject/core/login_screen.dart';
 import 'package:weekproject/core/style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:weekproject/ui/screen/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
+
 FirebaseAuth _auth = FirebaseAuth.instance;
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   bool isLogin = false;
   bool isVisible = false;
   TextEditingController? passwordController = TextEditingController();
   TextEditingController? usernameController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
             TextFormField(
               controller: usernameController,
               decoration:
-                  const InputDecoration(labelText: 'Enter email or username'),
+                  const InputDecoration(labelText: 'Enter email',
+                  ),
             ),
             const SizedBox(
               height: 10.0,
@@ -55,50 +63,51 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-            ),
+            ), 
+             
             const SizedBox(
-              height: 10.0,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(),
-                const Text(
-                  'Forgot Password?',
-                  style: TextStyle(color: kPrimaryColor),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20.0,
+              height: 30.0,
             ),
             GestureDetector(
               onTap: () async {
                 try{
-
-                  UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: usernameController!.text,
-                      password: passwordController!.text);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-                }on FirebaseAuthException catch (e) {
-                  if (e.code == 'user-not-found') {
-                    // print('No user found for that email.');
+                  UserCredential _userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword
+                    (email: usernameController!.text, password: passwordController!.text.toString());
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                } on FirebaseAuthException catch(e){
+                  // print(e);
+                  if (e.code == 'weak-password') {
+                    // print('The password provided is too weak.');
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: const Text('No user found for that email.'),
+                        SnackBar(content: const Text('Password should be at least 6 characters.'),
+                          backgroundColor: Colors.red.shade400,
+                          duration: const Duration(seconds: 1, microseconds: 200),
+                        ),
+                    );
+                  } else if (e.code == 'email-already-in-use') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: const Text('The account already exists for that email.'),
                         backgroundColor: Colors.red.shade400,
                         duration: const Duration(seconds: 1, microseconds: 200),
                       ),
                     );
-                  } else if (e.code == 'wrong-password') {
-                    // print('Wrong password provided for that user.');
+                    // print('The account already exists for that email.');
+                  }else if(e.code == 'invalid-email') {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: const Text('Wrong password provided for that user'),
-                        backgroundColor: Colors.red.shade400,
-                        duration: const Duration(seconds: 1, microseconds: 200),
-                      ),
-                    );
+                    SnackBar(content: const Text('The email address is badly formatted. Invalid Email'),
+                      backgroundColor: Colors.red.shade400,
+                      duration: const Duration(seconds: 1, microseconds: 200),
+                    ),
+                );
                   }
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: const Text('Something went wrong'),
+                      backgroundColor: Colors.red.shade400,
+                      duration: const Duration(seconds: 1, microseconds: 200),
+                    ),
+                  );
+                  print(e);
                 }
               },
               child: Container(
@@ -116,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 40,
                 child: const Center(
                   child: Text(
-                    'Log In',
+                    'Sign Up',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20.0,
@@ -126,6 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+
             const SizedBox(
               height: 30.0,
             ),
@@ -181,9 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 25.0,
                 ),
               ],
-              
             ),
-            
             Container(
               height: 50.0,
             ),
